@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UmkmExport;
 use App\Http\Requests\Umkm\IndexUmkmRequest;
 use App\Models\VillageUmkm;
 use App\Services\UmkmService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class UmkmController extends Controller
 {
     public function index(IndexUmkmRequest $request, UmkmService $service): Response
     {
         return Inertia::render('umkm/index', $service->getIndexData($request->validated()));
+    }
+
+    public function export(UmkmExport $export): BinaryFileResponse
+    {
+        $file = $export->export();
+
+        return response()->download($file['path'], $file['filename'])->deleteFileAfterSend(true);
     }
 
     public function destroy(VillageUmkm $umkm, UmkmService $service): RedirectResponse

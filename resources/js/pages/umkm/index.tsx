@@ -1,6 +1,7 @@
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import {
     CreditCard,
+    Download,
     Eye,
     MoreHorizontal,
     RotateCcw,
@@ -15,6 +16,7 @@ import type { FormEvent } from 'react';
 
 import {
     destroy as destroyUmkm,
+    exportMethod as exportUmkm,
     index as umkmIndex,
     restore as restoreUmkm,
 } from '@/actions/App/Http/Controllers/UmkmController';
@@ -231,6 +233,13 @@ export default function UmkmIndex({
                         </div>
 
                         <div className="flex flex-col gap-3 sm:flex-row">
+                            <a
+                                href={exportUmkm.url()}
+                                className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#0066AE] px-4 text-sm font-bold text-white transition hover:bg-[#093967]"
+                            >
+                                <Download className="size-4" />
+                                Export Excel
+                            </a>
                             <div className="inline-flex rounded-lg border border-[#DDE4EC] bg-white p-1">
                                 <button
                                     type="button"

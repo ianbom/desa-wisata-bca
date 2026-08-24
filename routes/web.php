@@ -47,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/villages/{village}/restore', [TourismVillageController::class, 'restore'])->middleware('role:admin,enumerator')->name('villages.restore');
 
     Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm');
+    Route::get('/umkm/export', [UmkmController::class, 'export'])->name('umkm.export');
     Route::delete('/umkm/{umkm}', [UmkmController::class, 'destroy'])->middleware('role:admin,enumerator')->name('umkm.destroy');
     Route::patch('/umkm/{umkm}/restore', [UmkmController::class, 'restore'])->middleware('role:admin,enumerator')->name('umkm.restore');
 
